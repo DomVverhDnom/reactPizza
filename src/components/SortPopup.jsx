@@ -1,6 +1,6 @@
 import React from "react";
 
-function SortPopup({ items }) {
+const SortPopup = React.memo(function SortPopup({ items }) {
   const [visiblePopup, setVisiblePopup] = React.useState(false); //хук на состояние попапа
   const [activeItem, setActiveItem] = React.useState(0); //хук на состояние попапа
   const sortRef = React.useRef(); // хук на DOM элемент
@@ -23,7 +23,6 @@ function SortPopup({ items }) {
   };
 
   React.useEffect(() => {
-    // хук отслеэивающий элемент
     document.body.addEventListener("click", handleOutsideClick);
   }, []);
   return (
@@ -62,6 +61,6 @@ function SortPopup({ items }) {
       )}
     </div>
   );
-}
+});
 
 export default SortPopup;
