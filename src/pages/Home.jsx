@@ -16,7 +16,7 @@ function Home() {
   const items = useSelector(({ pizzas }) => pizzas.items);
 
   React.useEffect(() => {
-    dispatch(fetchPizzas());
+    // dispatch(fetchPizzas(setPizzas()));
   });
 
   const onSelectCategory = React.useCallback((index) => {
