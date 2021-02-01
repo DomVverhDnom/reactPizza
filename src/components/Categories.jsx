@@ -14,9 +14,7 @@ const Categories = React.memo(function Categories({ activeCategory, items, onCli
           items.map((name, index) => (
             <li
               className={activeCategory === index ? "active" : ""}
-              onClick={() => {
-                onClickCategory(index);
-              }}
+              onClick={() => onClickCategory(index)}
               key={`${name}_${index}`}>
               {name}
             </li>
@@ -27,14 +25,11 @@ const Categories = React.memo(function Categories({ activeCategory, items, onCli
 });
 
 Categories.propTypes = {
-  activeCategory: PropTypes.number.isRequired,
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onClickCategory: PropTypes.func,
+  // activeCategory: PropTypes.oneOf([PropTypes.number, null]),
+  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onClickCategory: PropTypes.func.isRequired,
 };
 
-Categories.defaultProps = {
-  activeCategory: null,
-  items: [],
-};
+Categories.defaultProps = { activeCategory: null, items: [] };
 
 export default Categories;

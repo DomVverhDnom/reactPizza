@@ -6,9 +6,9 @@ import { fetchPizzas, setPizzas } from "../redux/actions/pizzas";
 
 const categoryNames = ["Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"];
 const sortItems = [
-  { name: "популярности", type: "rating" },
-  { name: "цене", type: "price" },
-  { name: "алфавиту", type: "alphabet" },
+  { name: "популярности", type: "rating", order: "desc" },
+  { name: "цене", type: "price", order: "desc" },
+  { name: "алфавиту", type: "name", order: "asc" },
 ];
 
 function Home() {
@@ -18,15 +18,15 @@ function Home() {
   const { category, sortBy } = useSelector(({ filters }) => filters);
 
   React.useEffect(() => {
-    // dispatch(fetchPizzas());
-  });
+    dispatch(fetchPizzas(sortBy, category));
+  }, [category, sortBy]);
 
   const onSelectCategory = React.useCallback((index) => {
     dispatch(setCategory(index));
   }, []);
 
   const onSelectSortType = React.useCallback((type) => {
-    dispatch(setCategory(index));
+    dispatch(setSortBy(type));
   }, []);
 
   return (
@@ -37,7 +37,11 @@ function Home() {
           onClickCategory={onSelectCategory}
           items={categoryNames}
         />
-        <SortPopup activeSortType={sortBy} items={sortItems} onClickSortType />
+        <SortPopup
+          activeSortType={sortBy.type}
+          items={sortItems}
+          onClickSortType={onSelectSortType}
+        />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
