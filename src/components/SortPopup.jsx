@@ -10,7 +10,8 @@ const SortPopup = React.memo(function SortPopup({ items, activeSortType, onClick
   };
 
   const handleOutsideClick = (e) => {
-    if (!e.path.includes(sortRef.current)) {
+    const path = e.path || (e.composedPath && e.composedPath());
+    if (!path.includes(sortRef.current)) {
       // проверяем, содержит ли путь ссылку на sort
       setVisiblePopup(false);
     }
